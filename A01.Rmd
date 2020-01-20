@@ -1,0 +1,43 @@
+---
+title: "A01_G45234213"
+author: "Huijie Han"
+date: "9/3/2019"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+## Import cities.csv from https://s3.amazonaws.com/programmingforanalytics/cities.csv into a data frame called mycities.
+
+mycities <- read.csv("https://s3.amazonaws.com/programmingforanalytics/cities.csv")
+print(mycities)
+
+```
+```{r}
+## 1. As you can see, the entry for Washington currently has two NA values. Please insert 0.7 for population and F for coastal.
+
+mycities[5,2] <- 0.7
+mycities[5,3] <- F
+print(mycities)
+
+```
+```{r}
+## 2. Next, create a new column called state and populate the column with the abbreviated state names for each city (e.g., NY for New York, CA for Los Angeles, etc.).
+
+statename <- c("NY","CA","IL","TX","DC")
+mycities$state <- statename
+print(mycities)
+
+```
+```{r}
+## 3. Lastly, write the data frame to a csv file called mycities.csv. 
+
+write.csv(mycities,file="mycities.csv")
+
+```
+

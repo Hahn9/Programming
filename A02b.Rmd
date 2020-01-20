@@ -1,0 +1,32 @@
+---
+title: "A02b_G45234213"
+author: "Huijie Han"
+date: "9/10/2019"
+output: word_document
+---
+
+```{r}
+mtcars
+```
+
+```{r}
+#Q(a)Draw a scatterplot with mpg on the y axis and displacement on the x axis. What does the graph tell you (one or two sentences)?
+plot(mpg~disp, data=mtcars) 
+#From the scatterplot We can see that, generally, the car with lower mpg often has more displacement.
+```
+
+```{r}
+#Q(b)Draw two histograms for mpg by am. One for am values of 0 and one for am values of 1. What do the graphs tell you (one or two sentences)?
+#Histograms for mpg by am values of 0
+subset0 <- subset(mtcars$mpg, mtcars$am == 0)
+hist(subset0,col="brown", main="Histogram for mpf (am=0)", 
+     xlab="mpg", border="cyan")
+#Histograms for mpg by am values of 1
+subset1 <- subset(mtcars$mpg, mtcars$am == 1)
+hist(subset1,col="brown", main="Histogram for mpg (am=1)", 
+     xlab="mpg", border="cyan")
+#For the histogram we can see that, generally, the performance of mpg of cars(am=1) is better than that of cars(am=0)
+```
+
+
+

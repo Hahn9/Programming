@@ -1,0 +1,81 @@
+---
+title: "A03_G45234213"
+author: "Huijie Han"
+date: "9/16/2019"
+output: html_document
+---
+
+```{r}
+# Read the file
+c <- read.csv("https://s3.amazonaws.com/programmingforanalytics/footballkicks.csv")
+```
+
+
+```{r}
+# Part A
+table(c$goal,c$practiceormatch)
+# As we can see in the table, all of the Melvin’s records have been grouped in a readily way. 
+# Overall, the probability of Goal is (74+685)/(16+177+74+685)=0.7973, the probability of Not Goal is (16+177)/(16+177+74+685)=0.2027;
+# In Matches attempts, the probability of Goal is 74/(16+74)=0.8222, the probability of Not Goal is 16/(16+74)=0.1778;
+# In Practices attempts, the probability of Goal is 685/(177+685)=0.7947, the probability of Not Goal is 177/(177+685)=0.2053;
+# It means that in the future Matches, the probability of Melvin’s attempts at field goals is 0.8222, and in the future practices the probability of Melvin’s attempts at field goals is 0.925.
+```
+
+
+```{r}
+# Part B
+# By using the functions below, firstly, all Matches in c will be assigned to mth, and all Practices in c will be assigned to pra; secondly, two values (Y/N) of variable "goal" in mth and pra will be replaced by 1 and 0 respectively.
+mth <- c[c$practiceormatch == 'M',]
+pra <- c[c$practiceormatch == 'P',]
+mth$goal <- ifelse(mth$goal == 'Y',1,0)
+pra$goal <- ifelse(pra$goal == 'Y',1,0)
+```
+```{r}
+# By using glm() function, the logistic regression between goal and yards will be established and accordingly the result will be produced by using summary() function.
+# a)(i) Write out the logistic function for Practice
+logfunpra <- glm(goal~yards, data = pra, family = 'binomial')
+summary(logfunpra)
+# a)(ii) Write out the logistic function for Matches
+logfunmth <- glm(goal~yards, data = mth, family = 'binomial')
+summary(logfunmth)
+# As results shown, we can see two types of deviance: the null deviance and the residual deviance. The null deviance shows how well the response variable is predicted by a model that includes only the intercept (grand mean). For Practices, the null deviance for our model is 875.30 with 861 degrees of freedom,  Once we add the explanatory variable (yards) the deviance decreased to 741.28 with 860 degrees of freedom. The Residual Deviance has reduced by 134.02 with a loss of 1 degrees of freedom. The p-value associated with this difference is 0. For Matches, the null deviance for our model is 84.241 with 89 degrees of freedom,  Once we add the explanatory variable (yards) the deviance decreased to 77.735 with 88 degrees of freedom. The Residual Deviance has reduced by 6.506 with a loss of 1 degrees of freedom. The p-value associated with this difference is 0.
+```
+
+
+```{r}
+# b) The probability of Melvin scoring a goal when he kicks from 20, 40 and 60 yards in practice?
+# Actually, we only need to apply three needed variables (20,40,60) into predict() function which is used to generate the corresponding probability.
+yards=c(20,40,60)
+predict(logfunpra, list(yards=c(20,40,60)), type = 'response')
+```
+
+
+```{r}
+# c) The probability of Melvin scoring a goal when he kicks from 20, 40 and 60 yards in matches?
+yards=c(20,40,60)
+predict(logfunmth, list(yards=c(20,40,60)), type = 'response')
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

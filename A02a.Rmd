@@ -1,0 +1,67 @@
+---
+title: "A02a_G45234213"
+author: "Huijie Han"
+date: "9/10/2019"
+output: word_document
+---
+
+
+```{r}
+##Q(a): Indicate the type of data (categorical or continuous) for each of the variables included in the dataset.
+head(mtcars)
+#By using head() function, we are able to get few rows and all of columns(also variables) of mtcars table. Actually, a continuous data set is a quantitative data set that can have values that are represented as values or fractions and a categorical variable is one that has two or more categories (values). Accordingly it is easier to know that mpg, disp, hp, drat, wt and qsec are continuous, and cyl, vs, am, gear and carb are categorical.
+
+##Q(b): For each of the categorical variables in the survey, indicate whether you believe the variable is nominal or ordinal.
+#Both nominal and ordinal belong to categorical variable. A nominal variable has no intrinsic ordering to its categories and an ordinal variable is a variable for which the possible values are ordered. Accordingly, we can know that vs and am are nominal, and cyl, gear and carb are ordinal.
+```
+
+```{r}
+##Q(c): Create a histogram for each of the continuous variables.
+#Histogram for 'mpg'
+hist(mtcars$mpg,col="brown", main="histogram for 'mpg'", 
+     xlab="mpg", border="cyan")
+```
+```{r}
+##Histogram for 'disp'
+hist(mtcars$disp,col="brown", main="histogram for 'disp'", 
+     xlab="disp", border="cyan")
+```
+```{r}
+##Histogram for 'hp'
+hist(mtcars$hp,col="brown", main="histogram for 'hp'", 
+     xlab="hp", border="cyan")
+```
+```{r}
+##Histogram for 'drat'
+hist(mtcars$drat,col="brown", main="histogram for 'drat'", 
+     xlab="drat", border="cyan")
+```
+```{r}
+##Histogram for 'wt'
+hist(mtcars$wt,col="brown", main="histogram for 'wt'", 
+     xlab="wt", border="cyan")
+```
+```{r}
+##Histogram for 'qsec'
+hist(mtcars$qsec,col="brown", main="histogram for 'qsec'", 
+     xlab="qsec", border="cyan")
+```
+
+```{r}
+##Q(d): Find the maximum and minimum of each column using apply().
+#Maximum of each column
+apply(mtcars,2,max)
+#Minimum of each column
+apply(mtcars,2,min)
+```
+
+```{r}
+##Q(e): Report the 25th, 50th, and 75th percentiles of all columns using apply().
+apply(mtcars, 2, quantile, probs=c(.25, .50, .75))
+```
+
+```{r}
+##Q(f): Report and interpret the interquartile range for the mpg.
+IQR(mtcars$mpg)
+```
+
